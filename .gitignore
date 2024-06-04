@@ -1,0 +1,10 @@
+reflex_ai/.DS_Store
+*.pyc
+*.csv
+*.json
+reflex_ai/bert_exp_without_weights/tensorboard/events.out.tfevents.1717507421.Sushas-Air.33235.0
+reflex_ai/bert_exp/tensorboard/events.out.tfevents.1717474393.Sushas-MacBook-Air.local.28983.0
+reflex_ai/bert_exp_without_weights/tensorboard/events.out.tfevents.1717519278.Sushas-Air.1800.0
+reflex_ai/bert_exp_without_weights_2/tensorboard/events.out.tfevents.1717519317.Sushas-Air.1854.0
+reflex_ai/bert_exp_without_weights_2/tensorboard/events.out.tfevents.1717519516.Sushas-Air.1953.0
+reflex_ai/exp_1/tensorboard/events.out.tfevents.1717474264.Sushas-MacBook-Air.local.28911.0
