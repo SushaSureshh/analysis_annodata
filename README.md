@@ -40,6 +40,13 @@ utterance_text
 | Right.      | 75      |
 | Mm. | 50     |
 
+Problem Solution 
+-  Hypothesis: To fine tune a BERT model to do classification of 20 news group data with atlease 90% accuracy and use the trained model to find the embedding of the documents in the dataset to eventually use to find most similar documents or clustering
+- Solution Architecture - Combine the client utterance text with the therapist utterance text and input to BERT base model, separated by SEP token. Take the embeddings from the CLS token from the last layer and aplly Cross Entropy loss. Calculate the accuracy and loss for each epoch
+    - lr=0.0001
+    - epoch = 10
+      
+
 
 
 
