@@ -25,16 +25,22 @@ The data was split to test and train with at random with 10% for test and 90% fo
 ## Pre-processing
 In the preprocessing step, I comnined the client utterance text to the therapist utterance text based on the time stap for context especially for the class Reflection and quetions, I thought that context is important.
 1. The input sequence length of the utterance text - 
-   Min length: 3 tokens
-   Max length: 356 tokens
-   Avg length: 20.0 tokens
+     - Min length: 3 tokens
+     - Max length: 356 tokens
+     - Avg length: 20.0 tokens
 3. The occurnace of a unique sequence in the utternace_text column for the therapist only, top 5 are shown below.
-                                            utterance_text  count
-0                                               Mm-hmm.    240
-1                                                 Yeah.    182
-2                                                 Okay.    153
-3                                                Right.     75
-4                                                   Mm.     50
+utterance_text 
+
+
+| utterance_text        | count           | 
+| ------------- |:-------------:| 
+|  Mm-hmm.     | 240 |
+| Yeah.      | 182      |
+| Okay. | 153    |
+| Right.      | 75      |
+| Mm. | 50     |
+
+
 
 
  
