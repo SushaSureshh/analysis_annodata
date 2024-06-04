@@ -8,3 +8,7 @@ Download the AnnoMI dataset, the dataset includes transcripts from
   model that predicts the main_therapist_behaviour label. Evaluate the model that you created. In
   this hypothetical example, the model will be used to characterize the behavior of MI practitioners
   during their clinical sessions.
+
+  ## Exploratory Data Analysis
+
+  In this anaylis I am using AnnoMI-simple.csv
