@@ -12,15 +12,32 @@ Download the AnnoMI dataset, the dataset includes transcripts from
   ## Exploratory Data Analysis
 
 In this anaylis I am using 'AnnoMI-simple.csv' as the AnnoMI-full.csv has duplicate value in the utterance_text column, diving deep into the data the droping duplicate may effect the analysis so for the time being I decided to do analysis on the simple file.
-The destribution of the classes.
+The destribution of the classes are shown below in the bar plot.
 
 ![image](https://github.com/SushaSureshh/reflex_ai/assets/35441892/01917d5f-20d3-40d4-908a-8188c51e32d9)
 
-The data was split to test and train with at random with 10% for test and 90% for train.
+The data was split to test and train with at random with 10% for test and 90% for train. 
 
 <img width="871" alt="Screenshot 2024-06-04 at 12 52 49 PM" src="https://github.com/SushaSureshh/reflex_ai/assets/35441892/cb03e763-2401-4f3c-80ff-472cfc822a6d">
 
 <img width="846" alt="Screenshot 2024-06-04 at 12 53 13 PM" src="https://github.com/SushaSureshh/reflex_ai/assets/35441892/14050e49-5301-430f-b9bc-9974454e6704">
+
+## Pre-processing
+In the preprocessing step, I comnined the client utterance text to the therapist utterance text based on the time stap for context especially for the class Reflection and quetions, I thought that context is important.
+1. The input sequence length of the utterance text - 
+   Min length: 3 tokens
+   Max length: 356 tokens
+   Avg length: 20.0 tokens
+3. The occurnace of a unique sequence in the utternace_text column for the therapist only, top 5 are shown below.
+                                            utterance_text  count
+0                                               Mm-hmm.    240
+1                                                 Yeah.    182
+2                                                 Okay.    153
+3                                                Right.     75
+4                                                   Mm.     50
+
+
+ 
 
 
 
