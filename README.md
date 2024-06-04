@@ -1,4 +1,4 @@
-# reflex_ai take home text
+# reflex_ai take home assignment
 ## Problem discussion
 Download the AnnoMI dataset, the dataset includes transcripts from
   video demonstrations of high- and low-quality motivational interviewing. The dataset also
