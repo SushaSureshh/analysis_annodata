@@ -78,7 +78,7 @@ def test(epoch_i):
     return Avg_loss, Avg_acc
 
 def loop():
-    writer = SummaryWriter(log_dir=os.path.join('./lstm_exp_2', 'tensorboard'))
+    writer = SummaryWriter(log_dir=os.path.join('./lstm_exp_2_garbage', 'tensorboard'))
     for epoch_i in range(EPOCH):
         Loss, Acc = train(epoch_i)
         writer.add_scalar("Train_Loss", np.mean(Loss), epoch_i)
