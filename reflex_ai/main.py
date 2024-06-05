@@ -105,6 +105,7 @@ def test(epoch_i):
     return Avg_loss, Avg_acc
 
 def loop():
+    # Plot the summary on Tensorboard
     writer = SummaryWriter(log_dir=os.path.join('./bert_exp_without_weights_2', 'tensorboard'))
     for epoch_i in range(EPOCH):
         Loss, Acc = train(epoch_i)
