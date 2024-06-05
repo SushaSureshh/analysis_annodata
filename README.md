@@ -9,6 +9,28 @@ Download the AnnoMI dataset, the dataset includes transcripts from
   this hypothetical example, the model will be used to characterize the behavior of MI practitioners
   during their clinical sessions.
 
+
+# reflex_ai file 
+
+## bert_model
+has the codes to run bert model
+
+## lstm_model
+has code to run the lstm model
+
+## Data 
+Has the training and test data I used from the file annoy-mi-simple.csv
+
+## Analysis
+
+reflex_ai.pdf has the analysis
+
+## Requiement.txt
+
+Has the requirements
+
+## 
+
       
 
 
