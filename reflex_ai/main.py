@@ -5,6 +5,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 from torch import optim
 from torch.utils.tensorboard import SummaryWriter
+from transformers import BertForSequenceClassification, AdamW, BertConfig
 from AnnoMI_data import AnnoMI_Dataset, collate_func
 from model import Bert_wrapper
 
@@ -14,18 +15,37 @@ train_dataset = AnnoMI_Dataset(filename="AnnoMI-processed_train.csv")
 test_dataset = AnnoMI_Dataset(filename="AnnoMI-processed_test.csv")
 train_dataloader = DataLoader(train_dataset, batch_size=64, shuffle=False, drop_last=False, collate_fn=collate_func)
 test_dataloader = DataLoader(test_dataset, batch_size=64, shuffle=False, drop_last=False, collate_fn=collate_func)
+# Load BertForSequenceClassification, the pretrained BERT model with a single 
+# classification layer on top. 
+# model = BertForSequenceClassification.from_pretrained(
+#     "bert-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
+#     num_labels = 4, # The number of expected labels.   
+#     output_attentions = False, # If the model returns attentions weights.
+#     output_hidden_states = False, # If the model returns all hidden-states.
+# )
+# Call the BERT wrapper
 model = Bert_wrapper()
+
 # Without weights for the class
 CE_loss = nn.CrossEntropyLoss()
+
 # With weights for the class
 # CE_loss = nn.CrossEntropyLoss(weight=torch.Tensor([116/544, 69/544, 145/544, 214/544])) # input1: batch x num_classes, input2: batch
-print(CE_loss)
+
+# SGD with mopmentum
 # optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+ 
+ # optimizer 
+
+# Note: AdamW is a class from the huggingface library 
+# with weight decal regularization
+# optimizer = AdamW(model.parameters(),
+#                   lr = 2e-5, # default is 5e-5 as seen in the litrature, choosing
+#                              # 2e-5
+#                   eps = 1e-8 # default is 1e-8.
+#                 )
 optimizer = optim.AdamW(model.parameters(), lr=0.0001)
 EPOCH=10
-
-
-import numpy as np
 
 def accuracy(output, target, topk=(1,)):
     """Computes the accuracy over the k top predictions for the specified values of k"""
@@ -62,12 +82,9 @@ def train(e):
         print("Train Epoch %s Step %s Loss %s Top1 step acc %s Top1 Avg acc %s" %(e, ind, loss.item(), top1, np.mean(Avg_acc)))
         # print("loss at step",loss.item(), ind)
         # print("Accurace at step:", train_accuracy)
-        
-        # break
-        # if ind ==2:
-        #     break
-    return Avg_loss, Avg_acc
 
+    return Avg_loss, Avg_acc
+#TODO Test the F1 scores for each class not the accuracy
 def test(e):
     Avg_acc, Avg_loss = [], []
     for ind, (x,y) in enumerate(test_dataloader):
@@ -78,8 +95,6 @@ def test(e):
         Avg_acc.append(top1)
         Avg_loss.append(loss.item())
         print("Test Epoch %s Step %s Loss %s Top1 step acc %s Top1 Avg acc %s" %(e, ind, loss.item(), top1, np.mean(Avg_acc)))
-        # if ind==2:
-        #     break
     return Avg_loss, Avg_acc
 
 def loop():
