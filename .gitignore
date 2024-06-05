@@ -1,6 +1,6 @@
 reflex_ai/.DS_Store
 *.pyc
-*.csv
+# *.csv
 *.json
 reflex_ai/bert_exp_without_weights/tensorboard/events.out.tfevents.1717507421.Sushas-Air.33235.0
 reflex_ai/bert_exp/tensorboard/events.out.tfevents.1717474393.Sushas-MacBook-Air.local.28983.0
@@ -13,3 +13,9 @@ bert_exp_without_weights_2_test_garbage/tensorboard/events.out.tfevents.17176002
 bert_exp_without_weights_2_test_garbage/tensorboard/events.out.tfevents.1717600339.Sushas-MacBook-Air.local.24380.0
 bert_exp_without_weights_2_test_garbage/tensorboard/events.out.tfevents.1717604227.Sushas-Air.26065.0
 bert_exp_without_weights_2_test_garbage/tensorboard/events.out.tfevents.1717604666.Sushas-Air.26192.0
+lstm_exp_2_garbage/tensorboard/events.out.tfevents.1717606216.Sushas-Air.27433.0
+reflex_ai/data/AnnoMI-full.csv
+reflex_ai/data/AnnoMI_simple_test.csv
+reflex_ai/data/AnnoMI_simple_train.csv
+reflex_ai/data/AnnoMI-processed.csv
+reflex_ai/data/AnnoMI-simple.csv
