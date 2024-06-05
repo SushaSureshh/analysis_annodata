@@ -23,7 +23,7 @@ Has the training and test data I used from the file annoy-mi-simple.csv
 
 ## Analysis
 
-reflex_ai.pdf has the analysis
+reflex_ai_analysis.pdf has the analysis
 
 ## Requiement.txt
 
