@@ -51,7 +51,7 @@ CE_loss = nn.CrossEntropyLoss()
 #                                             num_warmup_steps = 0, # Default value 
 #                                             num_training_steps = total_steps)               )
 optimizer = optim.AdamW(model.parameters(), lr=0.0001)
-EPOCH=10
+EPOCH=6
 
 def accuracy(output, target, topk=(1,)):
     """Computes the accuracy over the k top predictions for the specified values of k"""
@@ -85,8 +85,7 @@ def train(epoch_i):
         print("Train Epoch %s Step %s Loss %s Top1 step acc %s Top1 Avg acc %s" %(epoch_i, ind, loss.item(), top1, np.mean(Avg_acc)))
         # print("loss at step",loss.item(), ind)
         # print("Accurace at step:", train_accuracy)
-        #TODO Save the model
-        
+
     return Avg_loss, Avg_acc
 
 
@@ -105,7 +104,7 @@ def test(epoch_i):
 
 def loop():
     # Plot the summary on Tensorboard
-    writer = SummaryWriter(log_dir=os.path.join('./bert_exp_without_weights_2', 'tensorboard'))
+    writer = SummaryWriter(log_dir=os.path.join('./bert_exp_without_weights_2_test_garbage', 'tensorboard'))
     for epoch_i in range(EPOCH):
         Loss, Acc = train(epoch_i)
         writer.add_scalar("Train_Loss", np.mean(Loss), epoch_i)
@@ -113,6 +112,21 @@ def loop():
         Loss, Acc = test(epoch_i)
         writer.add_scalar("Test_Loss", np.mean(Loss), epoch_i)
         writer.add_scalar("Test_Accuracy", np.mean(Acc), epoch_i)
+        # Let's save the model
+
+        # Saving best-practices: if you use defaults names for the model, you can reload it using from_pretrained()
+        output_dir = './model_save/'
+        # Create output directory if needed
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        print("Saving model to %s" % output_dir)
+
+        # Save a trained model, configuration and tokenizer using `save_pretrained()`.
+        # They can then be reloaded using `from_pretrained()`
+        model_to_save = model.module if hasattr(model, 'module') else model  # Take care of distributed/parallel training
+        model_to_save.save_pretrained(output_dir)
+        # Good practice: save your training arguments together with the trained model
+        # torch.save(args, os.path.join(output_dir, 'training_args.bin'))
 
 
 if __name__ == "__main__":
