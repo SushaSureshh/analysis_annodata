@@ -9,7 +9,7 @@ from transformers import AutoTokenizer
 from torch.nn.utils.rnn import pad_sequence
 
 class AnnoMI_Dataset(Dataset):
-    def __init__(self, data_pth='reflex_ai/data/',filename="AnnoMI-full.csv", **kwargs) -> None:
+    def __init__(self, data_pth='reflex_ai/data/',filename="AnnoMI-processed.csv", **kwargs) -> None:
         super().__init__()
         self.filename = filename
         self.og_data = pd.read_csv(os.path.join(data_pth, self.filename))
