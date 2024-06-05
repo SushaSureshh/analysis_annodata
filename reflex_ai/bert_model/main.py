@@ -1,4 +1,6 @@
 import os
+import time
+import datetime
 import numpy as np
 import torch
 from torch import nn
@@ -51,7 +53,17 @@ CE_loss = nn.CrossEntropyLoss()
 #                                             num_warmup_steps = 0, # Default value 
 #                                             num_training_steps = total_steps)               )
 optimizer = optim.AdamW(model.parameters(), lr=0.0001)
-EPOCH=6
+EPOCH=10
+
+def format_time(elapsed):
+    '''
+    Takes a time in seconds and returns a string hh:mm:ss
+    '''
+    # Round to the nearest second.
+    elapsed_rounded = int(round((elapsed)))
+    
+    # Format as hh:mm:ss
+    return str(datetime.timedelta(seconds=elapsed_rounded))
 
 def accuracy(output, target, topk=(1,)):
     """Computes the accuracy over the k top predictions for the specified values of k"""
@@ -72,6 +84,7 @@ def accuracy(output, target, topk=(1,)):
 def train(epoch_i):
     optimizer.zero_grad()
     Avg_acc, Avg_loss = [], []
+    t0 = time.time()
     for ind, (x,y) in enumerate(train_dataloader):
         # Forward pass of the model by passing the data to the model followed by the backward pass
         outputs = model((x[0], x[1]))
@@ -82,11 +95,13 @@ def train(epoch_i):
         top1 = accuracy(outputs, y)
         Avg_acc.append(top1)
         Avg_loss.append(loss.item())
-        print("Train Epoch %s Step %s Loss %s Top1 step acc %s Top1 Avg acc %s" %(epoch_i, ind, loss.item(), top1, np.mean(Avg_acc)))
+        elapsed = format_time(time.time() - t0)
+        print("Train Epoch %s Step %s Loss %s Top1 step acc %s Top1 Avg acc %s Elapsed: %s" %(epoch_i, ind, loss.item(), top1, np.mean(Avg_acc), elapsed))
         # print("loss at step",loss.item(), ind)
         # print("Accurace at step:", train_accuracy)
-
+    print("  Training epcoh took: {:}".format(format_time(time.time() - t0)))
     return Avg_loss, Avg_acc
+
 
 
 #TODO Test the F1 scores for each class not the accuracy
@@ -112,22 +127,21 @@ def loop():
         Loss, Acc = test(epoch_i)
         writer.add_scalar("Test_Loss", np.mean(Loss), epoch_i)
         writer.add_scalar("Test_Accuracy", np.mean(Acc), epoch_i)
-        # Let's save the model
+    
+    # # Let's save the model
+    # # Saving best-practices: if you use defaults names for the model, you can reload it using from_pretrained()
+    # output_dir = './model_save/'
+    # # Create output directory if needed
+    # if not os.path.exists(output_dir):
+    #     os.makedirs(output_dir)
+    # print("Saving model to %s" % output_dir)
 
-        # Saving best-practices: if you use defaults names for the model, you can reload it using from_pretrained()
-        output_dir = './model_save/'
-        # Create output directory if needed
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
-        print("Saving model to %s" % output_dir)
-
-        # Save a trained model, configuration and tokenizer using `save_pretrained()`.
-        # They can then be reloaded using `from_pretrained()`
-        model_to_save = model.module if hasattr(model, 'module') else model  # Take care of distributed/parallel training
-        model_to_save.save_pretrained(output_dir)
-        # Good practice: save your training arguments together with the trained model
-        # torch.save(args, os.path.join(output_dir, 'training_args.bin'))
-
+    # # Save a trained model, configuration and tokenizer using `save_pretrained()`.
+    # # They can then be reloaded using `from_pretrained()`
+    # model_to_save = model.module if hasattr(model, 'module') else model  # Take care of distributed/parallel training
+    # model_to_save.save_pretrained(output_dir)
+    # # Good practice: save your training arguments together with the trained model
+    # # torch.save(args, os.path.join(output_dir, 'training_args.bin'))
 
 if __name__ == "__main__":
     loop()
