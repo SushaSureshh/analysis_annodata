@@ -6,8 +6,8 @@ from torch.utils.data import DataLoader
 from torch import optim
 from torch.utils.tensorboard import SummaryWriter
 from transformers import BertForSequenceClassification, AdamW, BertConfig
-from AnnoMI_data import AnnoMI_Dataset, collate_func
-from model import Bert_wrapper
+from reflex_ai.bert_model.AnnoMI_data import AnnoMI_Dataset, collate_func
+from reflex_ai.bert_model.model import Bert_wrapper
 
 
 
