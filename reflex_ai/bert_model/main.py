@@ -6,10 +6,8 @@ from torch.utils.data import DataLoader
 from torch import optim
 from torch.utils.tensorboard import SummaryWriter
 from transformers import BertForSequenceClassification, AdamW, BertConfig
-from reflex_ai.bert_model.AnnoMI_data import AnnoMI_Dataset, collate_func
-from reflex_ai.bert_model.model import Bert_wrapper
-
-
+from AnnoMI_data import AnnoMI_Dataset, collate_func
+from model import Bert_wrapper
 
 train_dataset = AnnoMI_Dataset(filename="AnnoMI-processed_train.csv")
 test_dataset = AnnoMI_Dataset(filename="AnnoMI-processed_test.csv")
@@ -87,7 +85,8 @@ def train(epoch_i):
         print("Train Epoch %s Step %s Loss %s Top1 step acc %s Top1 Avg acc %s" %(epoch_i, ind, loss.item(), top1, np.mean(Avg_acc)))
         # print("loss at step",loss.item(), ind)
         # print("Accurace at step:", train_accuracy)
-
+        #TODO Save the model
+        
     return Avg_loss, Avg_acc
 
 
