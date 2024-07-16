@@ -1,4 +1,3 @@
-# reflex_ai take home assignment
 ## Problem discussion
 Download the AnnoMI dataset, the dataset includes transcripts from
   video demonstrations of high- and low-quality motivational interviewing. The dataset also
@@ -9,8 +8,6 @@ Download the AnnoMI dataset, the dataset includes transcripts from
   this hypothetical example, the model will be used to characterize the behavior of MI practitioners
   during their clinical sessions.
 
-
-# reflex_ai file 
 
 ## bert_model
 has the codes to run bert model
@@ -23,7 +20,7 @@ Has the training and test data I used from the file annoy-mi-simple.csv
 
 ## Analysis
 
-reflex_ai_analysis.pdf has the analysis
+analysis.pdf has the analysis
 
 ## Requiement.txt
 
